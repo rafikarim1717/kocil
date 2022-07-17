@@ -20,14 +20,14 @@ const routes = [
       requiresAuth: true,
     },
   },
-  {
-    name: 'riwayat',
-    path: '/riwayat',
-    component: Riwayat,
-    meta: {
-      requiresAuth: true,
-    },
-  },
+  // {
+  //   name: 'riwayat',
+  //   path: '/riwayat',
+  //   component: Riwayat,
+  //   meta: {
+  //     requiresAuth: true,
+  //   },
+  // },
   {
     name: 'scanner-page',
     path: '/scanner-page',
@@ -44,19 +44,19 @@ const routes = [
       requiresAuth: true,
     },
   },
-  // {
-  //   name: 'manage',
-  //   // alias: '/manage',
-  //   path: '/manage-music',
-  //   meta: {
-  //     requiresAuth: true,
-  //   },
-  //   component: Manage,
-  //   beforeEnter: (to, from, next) => {
-  //     console.log('Manage Route Guard');
-  //     next();
-  //   },
-  // },
+  {
+    name: 'riwayat',
+    // alias: '/manage',
+    path: '/riwayat',
+    meta: {
+      requiresAuth: true,
+    },
+    component: Riwayat,
+    beforeEnter: (to, from, next) => {
+      console.log('Manage Route Guard');
+      next();
+    },
+  },
   {
     path: '/:catchAll(.*)*',
     redirect: { name: 'home' },

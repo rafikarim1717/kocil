@@ -7,7 +7,7 @@
         {{ userData.name ? 'HI,' + ' ' + userData.name : 'HI,User' }}
       </h2>
       <div class="inline-flex gap-x-2">
-        <p class="text-xl text-white">{{ totalPoin }}</p>
+        <p class="text-xl text-white">{{ totalPoin ? totalPoin : 0 }}</p>
         <img src="@/assets/coin.png" class="object-contain" />
       </div>
     </div>
@@ -98,15 +98,17 @@ export default {
       });
   },
   computed: {
+    /* eslint-disable */
     totalPoin() {
       const array = this.userData.tranksaksi;
 
       let totalPoin = 0;
-      array.map((value) => {
-        totalPoin += value.point;
-        return totalPoin;
-      });
-      return totalPoin;
+      array
+        ? array.map(arr => {
+            totalPoin += arr.point;
+            return totalPoin;
+          })
+        : '0';
     },
   },
   methods: {},
