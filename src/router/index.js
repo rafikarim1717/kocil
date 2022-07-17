@@ -16,21 +16,33 @@ const routes = [
     name: 'tukar-point',
     path: '/tukar-point',
     component: TukarPoint,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     name: 'riwayat',
     path: '/riwayat',
     component: Riwayat,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     name: 'scanner-page',
     path: '/scanner-page',
     component: ScannerPage,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     name: 'admin-page',
     path: '/admin-page',
     component: AdminPage,
+    meta: {
+      requiresAuth: true,
+    },
   },
   // {
   //   name: 'manage',
