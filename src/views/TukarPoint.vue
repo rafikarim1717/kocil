@@ -1,10 +1,7 @@
 <template>
   <!-- eslint-disable max-len -->
   <section class="">
-    <div
-      v-if="paymentform"
-      class="min-h-screen flex items-center bg-gray-800 py-6"
-    >
+    <div v-if="paymentform" class="flex items-center bg-gray-800 py-6">
       <div class="w-full p-6">
         <h2 class="text-center text-white font-bold text-2xl uppercase mb-10">
           Fill out payment form
@@ -79,10 +76,7 @@
   </section>
 
   <section class="">
-    <div
-      v-if="feedback"
-      class="min-h-screen flex items-center bg-gray-800 py-6"
-    >
+    <div v-if="feedback" class="flex items-center bg-gray-800 py-6">
       <div class="w-full p-4">
         <h2 class="text-center text-white font-bold text-2xl uppercase mb-10">
           Fill out feedback form
@@ -175,9 +169,9 @@ export default {
         })
         .then(() => {
           console.log('Document updated');
+          alert('berhasil submit form');
           this.feedback = true;
           this.paymentform = false;
-          alert('berhasil submit form');
         })
         .catch((error) => {
           console.error('Error adding document: ', error);
@@ -197,6 +191,7 @@ export default {
         })
         .then(() => {
           console.log('Document updated');
+          alert('terimakasih atas feedback anda');
           this.feedback = false;
           this.paymentform = true;
         })

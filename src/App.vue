@@ -1,8 +1,10 @@
 <template>
-  <div class="flex flex-col h-screen">
+  <div class="flex flex-col min-h-screen">
     <app-header />
 
-    <router-view> </router-view>
+    <div class="flex-grow">
+      <router-view />
+    </div>
 
     <auth-modal />
     <app-footer />

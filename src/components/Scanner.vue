@@ -40,7 +40,7 @@ const addData = () => {
 
 <template>
   <!-- eslint-disable max-len -->
-  <div class="flex flex-col min-h-screen">
+  <div class="flex flex-col">
     <StreamBarcodeReader
       @decode="onDecode"
       @loaded="onLoaded"

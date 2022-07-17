@@ -1,7 +1,7 @@
 <template>
   <!-- eslint-disable max-len -->
   <footer
-    class="text-center text-white bottom-0"
+    class="text-center text-white bottom-0 inset-x-0"
     style="background-color: #f1f1f1"
   >
     <div
