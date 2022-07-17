@@ -62,8 +62,7 @@
                   Navigation
                 </h3>
               </li>
-
-              <li>
+              <li v-if="userLoggedIn">
                 <router-link :to="{ name: 'scanner-page' }">
                   <a
                     class="flex flex-1 text-base text-gray-700 hover:bg-gray-200 font-semibold px-8 py-3"
@@ -73,7 +72,7 @@
                   </a>
                 </router-link>
               </li>
-              <li>
+              <li v-if="userLoggedIn">
                 <router-link :to="{ name: 'tukar-point' }">
                   <a
                     class="flex flex-1 text-base text-gray-700 hover:bg-gray-200 font-semibold px-8 py-3"
@@ -83,7 +82,7 @@
                   </a>
                 </router-link>
               </li>
-              <li>
+              <li v-if="userLoggedIn">
                 <router-link :to="{ name: 'riwayat' }">
                   <a
                     class="flex flex-1 text-base text-gray-700 hover:bg-gray-200 font-semibold px-8 py-3"
