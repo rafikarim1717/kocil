@@ -208,11 +208,11 @@
                     >
                       {{ value.message }}
                     </td>
-                    <!-- <td
+                    <td
                       class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
                     >
                       {{ value.rating }}
-                    </td> -->
+                    </td>
                   </tr>
                 </tbody>
               </table>

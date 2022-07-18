@@ -76,7 +76,7 @@
   </section>
 
   <section class="">
-    <div v-if="feedback" class="flex items-center bg-gray-800 py-6">
+    <div v-if="feedback" class="flex items-center h-screen bg-gray-800 py-6">
       <div class="w-full p-4">
         <h2 class="text-center text-white font-bold text-2xl uppercase mb-10">
           Fill out feedback form
@@ -84,7 +84,7 @@
         <div
           class="bg-white shadow-xl p-10 rounded-lg shadow md:w-3/4 mx-auto lg:w-1/2"
         >
-          <div class="mb-5">
+          <div class="mb-7">
             <label for="email" class="block mb-2 font-bold text-gray-600"
               >Rating</label
             >
@@ -99,7 +99,7 @@
               <label>3(Buruk)</label>
             </div>
           </div>
-          <div class="mb-5">
+          <div class="mb-7">
             <label for="message" class="block mb-2 font-bold text-gray-600"
               >Message</label
             >
@@ -145,7 +145,7 @@ export default {
       feedbackForm: {
         email: '',
         message: '',
-        rating: 0,
+        rating: '',
       },
       feedback: false,
       paymentform: true,
@@ -185,8 +185,9 @@ export default {
       dataTranksaksi
         .update({
           feedbackForm: firebase.firestore.FieldValue.arrayUnion({
-            email: this.feedbackForm.email,
+            email: firebase.auth().currentUser.email,
             message: this.feedbackForm.message,
+            rating: this.feedbackForm.rating,
           }),
         })
         .then(() => {
