@@ -92,6 +92,16 @@
                   </a>
                 </router-link>
               </li>
+              <li v-if="userLoggedIn && userData.admin == 1">
+                <router-link :to="{ name: 'admin-page' }">
+                  <a
+                    class="flex flex-1 text-base text-gray-700 hover:bg-gray-200 font-semibold px-8 py-3"
+                    href="#"
+                  >
+                    Admin Menu
+                  </a>
+                </router-link>
+              </li>
 
               <li v-if="!userLoggedIn">
                 <a
@@ -122,13 +132,24 @@
 
 <script>
 import { mapMutations, mapState } from 'vuex';
+import firebase from 'firebase';
+import { db } from '../includes/firebase';
 
 export default {
   name: 'Header',
   data() {
     return {
       showMenu: false,
+      userData: {
+        name: '',
+        email: '',
+        admin: 0,
+      },
     };
+  },
+  created() {},
+  mounted() {
+    this.isAdmin();
   },
   computed: {
     ...mapState(['userLoggedIn']),
@@ -145,6 +166,33 @@ export default {
       if (this.$route.meta.requiresAuth) {
         this.$router.push({ name: 'home' });
       }
+    },
+    isAdmin() {
+      const docRef = db
+        .collection('users')
+        .doc(firebase.auth().currentUser.uid);
+
+      docRef
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            const newData = doc.data();
+            this.userData = newData;
+            console.log('Document data:', doc.data());
+            console.log(this.userData);
+          } else {
+            // doc.data() will be undefined in this case
+            console.log('No such document!');
+          }
+        })
+        .catch((error) => {
+          console.log('Error getting document:', error);
+        });
+
+      if (this.userData.admin === 1) {
+        return this.userData.admin;
+      }
+      return this.userData.admin === false;
     },
     // toggleAuthModal() {
     //   this.$store.commit('toggleAuthModal');

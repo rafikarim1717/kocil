@@ -40,9 +40,6 @@ const routes = [
     name: 'admin-page',
     path: '/admin-page',
     component: AdminPage,
-    meta: {
-      requiresAuth: true,
-    },
   },
   {
     name: 'riwayat',

@@ -50,7 +50,7 @@
                   </thead>
                   <tbody>
                     <tr
-                      v-for="(item, index) in userData.historyForm"
+                      v-for="(item, index) in data.historyForm"
                       :key="item.id"
                       class="border-b"
                     >
@@ -130,7 +130,7 @@
                   </thead>
                   <tbody>
                     <tr
-                      v-for="(item, index) in userData.feedbackForm"
+                      v-for="(item, index) in data.feedbackForm"
                       :key="item.id"
                       class="border-b"
                     >
@@ -175,6 +175,19 @@ export default {
   data() {
     return {
       userData: {
+        historyForm: {
+          email: '',
+          mobileNumber: 0,
+          picked: '',
+          selectedPoint: 0,
+        },
+        feedbackForm: {
+          email: '',
+          message: '',
+          rating: '',
+        },
+      },
+      data: {
         historyForm: [],
         feedbackForm: [],
       },
@@ -183,14 +196,15 @@ export default {
   created() {
     const query = db
       .collection('users')
-      .where('historyForm', '!=', false)
+      .where('historyForm', '!=', null)
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           // doc.data() is never undefined for query doc snapshots
           const newData = doc.data();
           this.userData.historyForm = newData.historyForm;
-          console.log(this.userData);
+          this.data.historyForm.push(...this.userData.historyForm);
+          console.log(this.userData.historyForm);
           return query;
         });
       })
@@ -199,14 +213,16 @@ export default {
       });
     const queryFeedback = db
       .collection('users')
-      .where('historyForm', '!=', false)
+      .where('feedbackForm', '!=', null)
       .get()
       .then((queryFeedbackSnapshot) => {
         queryFeedbackSnapshot.forEach((doc) => {
           // doc.data() is never undefined for queryFeedback doc snapshots
           const newData = doc.data();
           this.userData.feedbackForm = newData.feedbackForm;
-          console.log(this.userData);
+          this.data.feedbackForm.push(...this.userData.feedbackForm);
+          console.log(this.data.feedbackForm);
+          // console.log(queryFeedback);
           return queryFeedback;
         });
       })
