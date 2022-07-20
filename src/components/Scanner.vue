@@ -17,12 +17,11 @@ const onDecode = (text) => {
 };
 
 const addData = () => {
-  const penampung = decodedText.value.toString().split('');
-  const penampungDua = penampung.map(Number);
-  const hasilPertama = penampungDua[0];
-  const hasilKedua = penampungDua[1];
+  const hasilPertama = decodedText.value[0];
+  const hasilKedua = decodedText.value[1];
 
   console.log(hasilPertama, hasilKedua);
+  alert('point dan jumlah botol berhasil masuk ke data user');
 
   const dataTranksaksi = db
     .collection('users')
