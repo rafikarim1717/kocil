@@ -7,7 +7,7 @@
     </section>
 
     <!-- Main Content -->
-    <section class="container mx-auto my-12 p-5">
+    <section class="container mx-auto my-12 p-6">
       <Dashboard v-if="userLoggedIn" />
     </section>
   </main>
