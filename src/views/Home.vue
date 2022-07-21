@@ -6,8 +6,6 @@
       <Pengumuman />
     </section>
 
-    {{ info }}
-
     <!-- Main Content -->
     <section class="container mx-auto my-12 p-6">
       <Dashboard v-if="userLoggedIn" />
