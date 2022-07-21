@@ -4,7 +4,7 @@ import { StreamBarcodeReader } from 'vue-barcode-reader';
 import firebase from 'firebase';
 import { db } from '../includes/firebase';
 
-const decodedText = ref('');
+const decodedText = ref([]);
 const showResult = ref(false);
 // const emit = defineEmits(['name']);
 
@@ -12,7 +12,8 @@ const onLoaded = () => {
   console.log('loaded');
 };
 const onDecode = (text) => {
-  decodedText.value = text;
+  decodedText.value = [text];
+  console.log(decodedText.value);
   showResult.value = true;
 };
 
