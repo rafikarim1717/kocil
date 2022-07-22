@@ -1,28 +1,36 @@
 <script setup>
+/* eslint-disable */
 import { ref } from 'vue';
 import { StreamBarcodeReader } from 'vue-barcode-reader';
 import firebase from 'firebase';
 import { db } from '../includes/firebase';
 
-const decodedText = ref([]);
+const decodedText = ref('');
 const showResult = ref(false);
+const hasilPertama = ref(['']);
 // const emit = defineEmits(['name']);
 
 const onLoaded = () => {
   console.log('loaded');
 };
-const onDecode = (text) => {
-  decodedText.value = [text];
-  console.log(decodedText.value);
+const onDecode = text => {
+  decodedText.value = text;
   showResult.value = true;
+  rubahNilai();
+};
+
+const rubahNilai = () => {
+  const penampung = decodedText.value.split(',');
+  const penampungDua = penampung.map(Number);
+  hasilPertama.value[0] = penampungDua[0];
+  hasilPertama.value[1] = penampungDua[1];
+  console.log(hasilPertama.value);
+
+  return hasilPertama.value;
 };
 
 const addData = () => {
-  const hasilPertama = decodedText.value[0];
-  const hasilKedua = decodedText.value[1];
-
-  console.log(hasilPertama, hasilKedua);
-  alert('point dan jumlah botol berhasil masuk ke data user');
+  rubahNilai();
 
   const dataTranksaksi = db
     .collection('users')
@@ -30,11 +38,12 @@ const addData = () => {
 
   dataTranksaksi.update({
     tranksaksi: firebase.firestore.FieldValue.arrayUnion({
-      point: hasilPertama,
-      jumlahBotol: hasilKedua,
+      point: hasilPertama.value[0],
+      jumlahBotol: hasilPertama.value[1],
       date: new Date().toString(),
     }),
   });
+  alert('selamat data telah masuk');
 };
 </script>
 
@@ -49,11 +58,15 @@ const addData = () => {
       v-if="showResult"
       class="bg-white p-10 mt-10 rounded-lg shadow-container text-tengah text-center border"
     >
-      <h3 class="text-lg uppercase">Selamat Anda Mendapatkan:</h3>
+      <h3 class="text-lg uppercase mb-3">Selamat Anda Mendapatkan:</h3>
       <h2 class="tracking-wide">
-        <h2 class="text-lg">{{ decodedText[0] + 'poin' }}</h2>
-        <br class="text-lg" />
-        {{ 'setelah menukarkan, ' + decodedText[1] + ' botol' }}
+        <h2 class="text-lg font-bold text-gray-700">
+          {{ hasilPertama[0] + 'poin' }}
+        </h2>
+        <br />
+        <h2 class="text-lg font-semibold text-gray-700">
+          {{ 'setelah menukarkan ' + hasilPertama[1] + ' Botol' }}
+        </h2>
       </h2>
       <div class="mt-5">
         <button
