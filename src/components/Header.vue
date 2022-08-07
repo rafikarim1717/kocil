@@ -1,6 +1,6 @@
 <template>
   <!-- eslint-disable max-len -->
-  <div class="bg-gray-800">
+  <div class="bg-gray-600">
     <nav class="flex container mx-auto px-5 py-5">
       <ul class="flex flex-grow space-x-4">
         <li>

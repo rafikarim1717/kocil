@@ -1,6 +1,7 @@
 <template>
   <div class="flex flex-col min-h-screen">
-    <app-header />
+
+    <app-header class="border-b" />
 
     <div class="flex-grow">
       <router-view />

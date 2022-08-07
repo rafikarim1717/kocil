@@ -1,51 +1,52 @@
 <template>
   <!-- eslint-disable max-len -->
   <!-- Main Content -->
-  <div class="flex flex-col p-5 gap-7 container-shadow bg-gray-800">
+  <div class="flex flex-col p-5 gap-7 container-shadow bg-white">
     <div class="flex justify-between">
-      <h2 class="text-xl text-white">
+      <h2 class="text-2xl text-black">
         {{ userData.name ? 'HI,' + ' ' + userData.name : 'HI,User' }}
       </h2>
       <div class="inline-flex gap-x-2">
-        <p class="text-xl text-white">{{ totalPoin }}</p>
+        <p class="text-2xl text-black">{{ totalPoin }}</p>
         <img src="@/assets/coin.png" class="object-contain" />
       </div>
     </div>
 
+      <hr class="style-one">
     <div
       class="grid grid-cols-1 self-center gap-12 md:grid-cols-2 lg:grid-cols-3"
     >
       <div class="max-w-sm my-4 rounded-lg shadow-menu">
-        <div class="center p-6">
-          <img class="w-24 h-24" src="@/assets/scan.png" />
+        <div class="center p-5">
+          <img class="w-28 h-28" src="@/assets/scan.png" />
         </div>
         <div class="px-6 py-4 text-center">
           <router-link :to="{ name: 'scanner-page' }">
-            <button class="rounded bg-gray-400 py-2 px-4 text-white">
+            <button class="rounded-lg bg-black py-2 px-4 text-white">
               Tukar-Botol
             </button>
           </router-link>
         </div>
       </div>
       <div class="max-w-sm my-4 rounded-lg shadow-menu">
-        <div class="center p-6">
-          <img class="w-24 h-24" src="@/assets/buy.png" />
+        <div class="center p-5">
+          <img class="w-28 h-28" src="@/assets/buy.png" />
         </div>
         <div class="px-6 py-4 text-center">
           <router-link :to="{ name: 'tukar-point' }">
-            <button class="rounded bg-gray-400 py-2 px-4 text-white">
+            <button class="rounded-lg bg-black py-2 px-4 text-white">
               Tukar-Point
             </button>
           </router-link>
         </div>
       </div>
       <div class="max-w-sm my-4 rounded-lg shadow-menu">
-        <div class="center p-6">
-          <img class="w-24 h-24" src="@/assets/history.png" />
+        <div class="center p-5">
+          <img class="w-28 h-28" src="@/assets/history.png" />
         </div>
         <div class="px-6 py-4 text-center">
           <router-link :to="{ name: 'riwayat' }">
-            <button class="rounded bg-gray-400 py-2 px-4 text-white">
+            <button class="rounded-lg bg-black py-2 px-4 text-white">
               Riwayat Tranksaksi
             </button>
           </router-link>
@@ -123,9 +124,7 @@ export default {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;1,300&display=swap');
 .container-shadow {
-  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
-    rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
-    rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 h2 {
   font-family: 'Poppins', sans-serif;
@@ -137,11 +136,16 @@ p {
 }
 
 .shadow-menu {
-  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
-    rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
-    rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
 }
 .center {
   text-align: -webkit-center;
+}
+hr.style-one {
+    width: 100%;
+    border: 0;
+    height: 2px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
 }
 </style>

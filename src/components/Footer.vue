@@ -1,26 +1,19 @@
 <template>
-  <!-- eslint-disable max-len -->
-  <footer
-    class="text-center text-white bottom-0 inset-x-0"
-    style="background-color: #f1f1f1"
-  >
-    <div
-      class="text-center text-gray-700 p-4"
-      style="background-color: rgba(0, 0, 0, 0.2)"
-    >
-      © 2021 Copyright:
-      <a class="text-gray-800" href="https://tailwind-elements.com/">Websync</a>
-    </div>
-  </footer>
+    <section class="bottom-0">
+        <footer class="border-t text-center text-white bg-gray-600 py-4">
+            <p class="my-2 text-center text-base text-white">
+                &copy; 2022 Websync All rights reserved.
+            </p>
+        </footer>
+    </section>
 </template>
 
 <script>
 export default {
   name: 'Footer',
   data() {
-    return {};
+    return {
+    };
   },
-  computed: {},
-  methods: {},
 };
 </script>

@@ -1,8 +1,8 @@
 <template>
   <!-- eslint-disable max-len -->
   <section class="">
-    <div v-if="paymentform" class="flex items-center bg-gray-800 py-6">
-      <div class="w-full p-6">
+    <div v-if="paymentform" class="flex items-center h-screen bg-gray-600 py-4">
+      <div class="w-full p-4">
         <h2 class="text-center text-white font-bold text-2xl uppercase mb-10">
           Fill out payment form
         </h2>
@@ -37,10 +37,10 @@
                 >Type</label
               >
               <div class="flex gap-2">
-                <input type="radio" value="Gopay" v-model="formData.picked" />
+                <input type="radio" value="Gopay" v-model="formData.picked" class="focus:outline-none"/>
                 <label>Gopay</label>
 
-                <input type="radio" value="Ovo" v-model="formData.picked" />
+                <input type="radio" value="Ovo" v-model="formData.picked"  class="focus:outline-none"/>
                 <label>Ovo</label>
 
                 <label> (1P = 1RP) </label>
@@ -55,11 +55,11 @@
                 v-model="formData.selectedPoint"
                 class="border border-black shadow p-3 w-full rounded"
               >
-                <option disabled value="">Please select one</option>
-                <option>25,000</option>
-                <option>50,000</option>
-                <option>100,000</option>
-                <option>150,000</option>
+                <option disabled value="" class="p-1">Please select one</option>
+                <option class="p-1">25,000</option>
+                <option class="p-1">50,000</option>
+                <option class="p-1">100,000</option>
+                <option class="p-1">150,000</option>
               </select>
             </div>
           </form>
@@ -76,7 +76,7 @@
   </section>
 
   <section class="">
-    <div v-if="feedback" class="flex items-center h-screen bg-gray-800 py-6">
+    <div v-if="feedback" class="flex items-center h-screen bg-gray-600 py-4">
       <div class="w-full p-4">
         <h2 class="text-center text-white font-bold text-2xl uppercase mb-10">
           Fill out feedback form
@@ -89,13 +89,13 @@
               >Rating</label
             >
             <div class="flex gap-2">
-              <input type="radio" value="1" v-model="feedbackForm.rating" />
+              <input type="radio" value="1" v-model="feedbackForm.rating" class="focus:outline-none" />
               <label>1(Baik)</label>
 
-              <input type="radio" value="2" v-model="feedbackForm.rating" />
+              <input type="radio" value="2" v-model="feedbackForm.rating" class="focus:outline-none" />
               <label>2(Sedang)</label>
 
-              <input type="radio" value="3" v-model="feedbackForm.rating" />
+              <input type="radio" value="3" v-model="feedbackForm.rating" class="focus:outline-none" />
               <label>3(Buruk)</label>
             </div>
           </div>
@@ -195,6 +195,7 @@ export default {
           alert('terimakasih atas feedback anda');
           this.feedback = false;
           this.paymentform = true;
+          this.$router.push({ name: 'home' });
         })
         .catch((error) => {
           console.error('Error adding document: ', error);
