@@ -16,7 +16,7 @@
     <div
       class="grid grid-cols-1 self-center gap-12 md:grid-cols-2 lg:grid-cols-3"
     >
-      <div class="max-w-sm my-4 rounded-lg shadow-menu">
+      <div v-if="userData.admin != 1" class="max-w-sm my-4 rounded-lg shadow-menu">
         <div class="center p-5">
           <img class="w-28 h-28" src="@/assets/scan.png" />
         </div>
@@ -28,7 +28,7 @@
           </router-link>
         </div>
       </div>
-      <div class="max-w-sm my-4 rounded-lg shadow-menu">
+      <div v-if="userData.admin != 1"  class="max-w-sm my-4 rounded-lg shadow-menu">
         <div class="center p-5">
           <img class="w-28 h-28" src="@/assets/buy.png" />
         </div>
@@ -66,6 +66,7 @@ export default {
   data() {
     return {
       userData: {
+        admin: 0,
         name: '',
         email: '',
         tranksaksi: [
