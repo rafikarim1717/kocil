@@ -6,7 +6,7 @@
         <li>
           <router-link :to="{ name: 'home' }" exact-active-class="no-active"
             class="flex items-center space-x-3 text-gray-700 md:mr-5">
-            <span class="text-gray-200 hover:text-gray-300 text-2xl font-semibold py-1">Smartwase</span>
+            <span class="text-gray-200 hover:text-gray-300 text-2xl font-semibold py-1">SmartWaste</span>
           </router-link>
         </li>
       </ul>
