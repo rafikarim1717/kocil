@@ -7,9 +7,11 @@ import { db } from '../includes/firebase';
 import router from '../router';
 
 const decodedText = ref('');
+const showBarcode = ref(true);
 const showResult = ref(false);
 const hasilPertama = ref(['']);
-// const emit = defineEmits(['name']);
+const popupBox = ref(false);
+const countdown = ref(25);
 
 const onLoaded = () => {
   console.log('loaded');
@@ -19,6 +21,22 @@ const onDecode = text => {
   showResult.value = true;
   rubahNilai();
 };
+
+const countDownTimer = () => {
+  if (countdown.value > 0) {
+    setTimeout(() => {
+      countdown.value -= 1
+      countDownTimer()
+    }, 1000)
+  }
+  returnHome();
+}
+
+const returnHome = () => {
+  if (countdown.value == 0) {
+    router.push({ path: '/', replace: true })
+  }
+}
 
 const rubahNilai = () => {
   const penampung = decodedText.value.split(',');
@@ -47,7 +65,10 @@ const addData = () => {
     .then(() => {
       console.log('Data point dan botol telah masuk');
       alert('point anda sudah bertambah ');
-      router.push({ path: '/', replace: true })
+      popupBox.value = true;
+      showResult.value = false;
+      showBarcode.value = false;
+      countDownTimer();
     })
     .catch((error) => {
       console.error('Error adding document: ', error);
@@ -57,23 +78,36 @@ const addData = () => {
 
 <template>
   <!-- eslint-disable max-len -->
-  <div class="flex flex-col">
-    <StreamBarcodeReader @decode="onDecode" @loaded="onLoaded"></StreamBarcodeReader>
-    <div v-if="showResult" class="bg-white p-10 mt-10 rounded-lg shadow-container text-tengah text-center border">
-      <h3 class="text-lg uppercase mb-3">Selamat Anda Mendapatkan:</h3>
-      <h2 class="tracking-wide">
-        <h2 class="text-lg font-bold text-gray-700">
-          {{ hasilPertama[0] + ' poin' }}
-        </h2>
-        <br />
-        <h2 class="text-lg font-semibold text-gray-700">
-          {{ 'setelah menukarkan ' + hasilPertama[1] + ' Botol' }}
-        </h2>
-      </h2>
-      <div class="mt-5">
-        <button @click="addData" class="col-span-12 rounded-lg px-4 py-2 bg-black text-white duration-300">
-          Submit
-        </button>
+  <div class="flex flex-col text-center items-center self-center justify-center">
+    <div v-if="showBarcode" class="">
+      <StreamBarcodeReader @decode="onDecode" @loaded="onLoaded"></StreamBarcodeReader>
+    </div>
+    <div v-if="showResult" class="bg-white p-10 mt-10 rounded-lg shadow-container border">
+      <div class="bg-white flex flex-col gap-6 p-6">
+        <div class="tracking-wide">
+          <h3 class="text-xl uppercase mb-2">Selamat Anda Mendapatkan:</h3>
+          <p class="text-lg text-black">
+            {{ hasilPertama[0] + ' poin' }}
+          </p>
+          <br />
+          <h3 class="text-xl uppercase mb-2">
+            Setelah Menukarkan :
+          </h3>
+          <p class="text-lg text-black">
+            {{ hasilPertama[1] + ' botol' }}
+          </p>
+        </div>
+        <div class="mt-4">
+          <button @click="addData" class="col-span-12 rounded-lg px-4 py-2 bg-black text-white duration-300">
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+    <div v-if="popupBox" class="bg-white p-10 mt-10 rounded-lg shadow-container border">
+      <div class="bg-white flex flex-col gap-6 p-6">
+        <h3 class="text-2xl font-bold mb-2">Silahkan Tunggu Selama</h3>
+        <p class="text-xl font-medium"> {{ countdown }}</p>
       </div>
     </div>
   </div>

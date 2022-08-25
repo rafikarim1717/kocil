@@ -7,18 +7,16 @@
         {{ userData.name ? 'HI,' + ' ' + userData.name : 'HI,User' }}
       </h2>
       <div class="inline-flex gap-x-2">
-        <p class="text-2xl text-black">{{ totalPoin }}</p>
-        <img src="@/assets/coin.png" class="object-contain" />
+        <p class="text-2xl text-black">{{ checkPoin }}</p>
+        <img src="@/assets/images/coin.png" class="object-contain" />
       </div>
     </div>
 
-      <hr class="style-one">
-    <div
-      class="grid grid-cols-1 self-center gap-12 md:grid-cols-2 lg:grid-cols-3"
-    >
-      <div v-if="userData.admin != 1" class="max-w-sm my-4 rounded-lg shadow-menu">
+    <hr class="style-one">
+    <div class="grid grid-cols-1 self-center gap-12 md:grid-cols-2 lg:grid-cols-3">
+      <div v-show="userData.admin !== 1" class="max-w-sm my-4 rounded-lg shadow-menu">
         <div class="center p-5">
-          <img class="w-28 h-28" src="@/assets/scan.png" />
+          <img class="w-28 h-28" src="@/assets/images/scan.png" />
         </div>
         <div class="px-6 py-4 text-center">
           <router-link :to="{ name: 'scanner-page' }">
@@ -28,9 +26,9 @@
           </router-link>
         </div>
       </div>
-      <div v-if="userData.admin != 1"  class="max-w-sm my-4 rounded-lg shadow-menu">
+      <div v-show="userData.admin !== 1" class="max-w-sm my-4 rounded-lg shadow-menu">
         <div class="center p-5">
-          <img class="w-28 h-28" src="@/assets/buy.png" />
+          <img class="w-28 h-28" src="@/assets/images/buy.png" />
         </div>
         <div class="px-6 py-4 text-center">
           <router-link :to="{ name: 'tukar-point' }">
@@ -42,7 +40,7 @@
       </div>
       <div class="max-w-sm my-4 rounded-lg shadow-menu">
         <div class="center p-5">
-          <img class="w-28 h-28" src="@/assets/history.png" />
+          <img class="w-28 h-28" src="@/assets/images/history.png" />
         </div>
         <div class="px-6 py-4 text-center">
           <router-link :to="{ name: 'riwayat' }">
@@ -69,6 +67,7 @@ export default {
         admin: 0,
         name: '',
         email: '',
+        jumlahPoin: 0,
         tranksaksi: [
           {
             point: 0,
@@ -77,6 +76,7 @@ export default {
           },
         ],
       },
+      totalPoin: 0,
     };
   },
   created() {
@@ -100,53 +100,54 @@ export default {
       });
   },
   computed: {
-    totalPoin() {
+    checkPoin() {
       if (this.userData.tranksaksi) {
         const array = this.userData.tranksaksi;
-
-        let totalPoin = 0;
         array.map((value) => {
-          totalPoin += value.point;
-          return totalPoin;
+          this.totalPoin += value.point;
+          return this.totalPoin;
         });
-        return totalPoin;
+        console.log(this.totalPoin);
+        return this.totalPoin;
       }
       return 0;
     },
   },
   methods: {
-    // if(this.userData.tranksaksi){
-    //       totalPoin();
-    // }
   },
 };
 </script>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;1,300&display=swap');
+
 .container-shadow {
-box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
+
 h2 {
   font-family: 'Poppins', sans-serif;
   font-weight: 500 bold;
 }
+
 p {
   font-family: 'Poppins', sans-serif;
   font-weight: 500 bold;
 }
 
 .shadow-menu {
-box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
+  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
 }
+
 .center {
   text-align: -webkit-center;
 }
+
 hr.style-one {
-    width: 100%;
-    border: 0;
-    height: 2px;
-    background: #333;
-    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+  width: 100%;
+  border: 0;
+  height: 2px;
+  background: #333;
+  background-image: linear-gradient(to right, #ccc, #333, #ccc);
 }
 </style>

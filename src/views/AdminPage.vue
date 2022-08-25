@@ -1,7 +1,6 @@
 <template>
   <!-- eslint-disable max-len -->
   <main>
-    <!-- Introduction -->
     <section class="container mx-auto my-12 px-5">
       <div class="p-6 flex justify-center">
         <h3 class="text-3xl text-gray-700 font-bold -ml-3">
