@@ -1,6 +1,5 @@
 <template>
   <!-- eslint-disable max-len -->
-  <!-- Main Content -->
   <div class="flex flex-col p-5 gap-7 container-shadow bg-white">
     <div class="flex justify-between">
       <h2 class="text-2xl text-black">
@@ -11,46 +10,53 @@
         <img src="@/assets/images/coin.png" class="object-contain" />
       </div>
     </div>
-
-    <hr class="style-one">
     <div class="grid grid-cols-1 self-center gap-12 md:grid-cols-2 lg:grid-cols-3">
-      <div v-show="userData.admin !== 1" class="max-w-sm my-4 rounded-lg shadow-menu">
-        <div class="center p-5">
-          <img class="w-28 h-28" src="@/assets/images/scan.png" />
+      =======
+      <hr class="style-one">
+      <div class="grid grid-cols-1 self-center gap-12 md:grid-cols-2 lg:grid-cols-3">
+        >>>>>>> d9065b4296dd2eb791699a8b1158d8208d931a7c
+        <div v-show="userData.admin !== 1" class="max-w-sm my-4 rounded-lg shadow-menu">
+          <div class="center p-5">
+            <img class="w-28 h-28" src="@/assets/images/scan.png" />
+          </div>
+          <div class="px-6 py-4 text-center">
+            <router-link :to="{ name: 'scanner-page' }">
+              <button class="rounded-lg bg-black py-2 px-4 text-white">
+                Tukar-Botol
+              </button>
+            </router-link>
+          </div>
         </div>
-        <div class="px-6 py-4 text-center">
-          <router-link :to="{ name: 'scanner-page' }">
-            <button class="rounded-lg bg-black py-2 px-4 text-white">
-              Tukar-Botol
-            </button>
-          </router-link>
-        </div>
-      </div>
-      <div v-show="userData.admin !== 1" class="max-w-sm my-4 rounded-lg shadow-menu">
-        <div class="center p-5">
-          <img class="w-28 h-28" src="@/assets/images/buy.png" />
-        </div>
-        <div class="px-6 py-4 text-center">
-          <router-link :to="{ name: 'tukar-point' }">
-            <button class="rounded-lg bg-black py-2 px-4 text-white">
-              Tukar-Point
-            </button>
-          </router-link>
-        </div>
-      </div>
-      <div class="max-w-sm my-4 rounded-lg shadow-menu">
-        <div class="center p-5">
-          <img class="w-28 h-28" src="@/assets/images/history.png" />
-        </div>
-        <div class="px-6 py-4 text-center">
-          <router-link :to="{ name: 'riwayat' }">
-            <button class="rounded-lg bg-black py-2 px-4 text-white">
-              Riwayat Tranksaksi
-            </button>
-          </router-link>
-        </div>
+       <div v-show="userData.admin !== 1" class="max-w-sm my-4 rounded-lg shadow-menu">
+          =======
+          <div v-show="userData.admin !== 1" class="max-w-sm my-4 rounded-lg shadow-menu">
+
+            <div class="center p-5">
+              <img class="w-28 h-28" src="@/assets/images/buy.png" />
+            </div>
+            <div class="px-6 py-4 text-center">
+              <router-link :to="{ name: 'tukar-point' }">
+                <button class="rounded-lg bg-black py-2 px-4 text-white">
+                  Tukar-Point
+                </button>
+              </router-link>
+            </div>
+          </div>
+          <div class="max-w-sm my-4 rounded-lg shadow-menu">
+            <div class="center p-5">
+              <img class="w-28 h-28" src="@/assets/images/history.png" />
+            </div>
+            <div class="px-6 py-4 text-center">
+              <router-link :to="{ name: 'riwayat' }">
+                <button class="rounded-lg bg-black py-2 px-4 text-white">
+                  Riwayat Tranksaksi
+                </button>
+              </router-link>
+            </div>
+          </div>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
