@@ -6,7 +6,7 @@
         {{ userData.name ? 'HI,' + ' ' + userData.name : 'HI,User' }}
       </h2>
       <div class="inline-flex gap-x-2">
-        <p class="text-2xl text-black">{{ checkPoin - checkHistoryForm }}</p>
+        <p class="text-2xl text-black">{{ checkPoin ? checkPoin - checkHistoryForm : 0 }}</p>
         <img src="@/assets/images/coin.png" class="object-contain" />
       </div>
     </div>
