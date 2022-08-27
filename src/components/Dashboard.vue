@@ -1,49 +1,49 @@
 <template>
   <!-- eslint-disable max-len -->
-  <div class="flex flex-col p-5 gap-7 container-shadow bg-white">
+  <div class="flex flex-col p-8 gap-2 container-shadow bg-white">
     <div class="flex justify-between">
       <h2 class="text-2xl text-black">
         {{ userData.name ? 'HI,' + ' ' + userData.name : 'HI,User' }}
       </h2>
       <div class="inline-flex gap-x-2">
-        <p class="text-2xl text-black">{{ checkPoin }}</p>
+        <p class="text-2xl text-black">{{ checkPoin - checkHistoryForm }}</p>
         <img src="@/assets/images/coin.png" class="object-contain" />
       </div>
     </div>
     <hr class="style-one">
-    <div class="grid grid-cols-1 self-center gap-12 md:grid-cols-2 lg:grid-cols-3">
-      <div v-show="userData.admin !== 1" class="max-w-sm my-4 rounded-lg shadow-menu">
-        <div class="center p-5">
-          <img class="w-28 h-28" src="@/assets/images/scan.png" />
+    <div class="flex flex-wrap place-content-center self-center gap-4">
+      <div v-show="userData.admin !== 1" class="max-w-sm my-2 rounded-lg shadow-menu">
+        <div class="center p-3">
+          <img class="w-20 h-20" src="@/assets/images/scan.png" />
         </div>
         <div class="px-6 py-4 text-center">
           <router-link :to="{ name: 'scanner-page' }">
-            <button class="rounded-lg bg-black py-2 px-4 text-white">
+            <button class="rounded-lg bg-black py-2 px-2 text-white text-sm">
               Tukar-Botol
             </button>
           </router-link>
         </div>
       </div>
-      <div v-show="userData.admin !== 1" class="max-w-sm my-4 rounded-lg shadow-menu">
-        <div class="center p-5">
-          <img class="w-28 h-28" src="@/assets/images/buy.png" />
+      <div v-show="userData.admin !== 1" class="max-w-sm my-2 rounded-lg shadow-menu">
+        <div class="center p-3">
+          <img class="w-20 h-20" src="@/assets/images/buy.png" />
         </div>
         <div class="px-6 py-4 text-center">
           <router-link :to="{ name: 'tukar-point' }">
-            <button class="rounded-lg bg-black py-2 px-4 text-white">
+            <button class="rounded-lg bg-black py-2 px-2 text-white text-sm">
               Tukar-Point
             </button>
           </router-link>
         </div>
       </div>
-      <div class="max-w-sm my-4 rounded-lg shadow-menu">
-        <div class="center p-5">
-          <img class="w-28 h-28" src="@/assets/images/history.png" />
+      <div class="max-w-sm my-2 rounded-lg shadow-menu">
+        <div class="center p-3">
+          <img class="w-20 h-20" src="@/assets/images/history.png" />
         </div>
         <div class="px-6 py-4 text-center">
           <router-link :to="{ name: 'riwayat' }">
-            <button class="rounded-lg bg-black py-2 px-4 text-white">
-              Riwayat Tranksaksi
+            <button class="rounded-lg bg-black py-2 px-2 text-white text-sm">
+              Riwayat
             </button>
           </router-link>
         </div>
@@ -67,6 +67,14 @@ export default {
         name: '',
         email: '',
         jumlahPoin: 0,
+        historyForm: [
+          {
+            email: '',
+            mobileNumber: 0,
+            picked: '',
+            selectedPoint: 0,
+          },
+        ],
         tranksaksi: [
           {
             point: 0,
@@ -76,6 +84,7 @@ export default {
         ],
       },
       totalPoin: 0,
+      totalSelectedPoin: 0,
     };
   },
   created() {
@@ -97,6 +106,7 @@ export default {
       .catch((error) => {
         console.log('Error getting document:', error);
       });
+    this.addTotalPoin();
   },
   computed: {
     checkPoin() {
@@ -106,13 +116,36 @@ export default {
           this.totalPoin += value.point;
           return this.totalPoin;
         });
-        console.log(this.totalPoin);
         return this.totalPoin;
+      }
+      return 0;
+    },
+    checkHistoryForm() {
+      if (this.userData.historyForm) {
+        const array = this.userData.historyForm;
+        array.map((value) => {
+          this.totalSelectedPoin += value.selectedPoint;
+          return this.totalSelectedPoin;
+        });
+        return this.totalSelectedPoin;
       }
       return 0;
     },
   },
   methods: {
+    async addTotalPoin() {
+      console.log(this.userData.jumlahPoin);
+
+      const userPoin = db.collection('users').doc(firebase.auth().currentUser.uid);
+      try {
+        await userPoin.update({
+          jumlahPoin: this.userData.jumlahPoin,
+        });
+        console.log('Jumlah Poin Telah Update');
+      } catch (error) {
+        console.error('Error updating document: ', error);
+      }
+    },
   },
 };
 </script>
