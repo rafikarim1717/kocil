@@ -1,6 +1,6 @@
 <template>
   <!-- eslint-disable max-len -->
-  <div class="flex flex-col p-8 gap-2 container-shadow bg-white">
+  <div class="flex flex-col p-8 gap-2 container-shadow bg-white max-w-xl center">
     <div class="flex justify-between">
       <h2 class="text-2xl text-black">
         {{ userData.name ? 'HI,' + ' ' + userData.name : 'HI,User' }}
@@ -26,7 +26,7 @@
       </div>
       <div v-show="userData.admin !== 1" class="max-w-sm my-2 rounded-lg shadow-menu">
         <div class="center p-3">
-          <img class="w-20 h-20" src="@/assets/images/buy.png" />
+          <img class="w-20 h-20" src="@/assets/images/tukar-point.jpeg" />
         </div>
         <div class="px-6 py-4 text-center">
           <router-link :to="{ name: 'tukar-point' }">

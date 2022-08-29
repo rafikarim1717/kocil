@@ -106,7 +106,9 @@ const addData = () => {
     </div>
     <div v-if="popupBox" class="bg-white p-10 mt-10 rounded-lg shadow-container border">
       <div class="bg-white flex flex-col gap-6 p-6">
-        <h3 class="text-2xl font-bold mb-2">Silahkan Tunggu Selama</h3>
+        <h3 class="text-2xl font-bold mb-2">Terimakasih</h3>
+        <h3 class="text-2xl font-bold mb-2">Poin Anda Sedang Di Proses</h3>
+        <h3 class="text-2xl font-bold mb-2">Mohon Bersabar</h3>
         <p class="text-xl font-medium"> {{ countdown }}</p>
       </div>
     </div>
