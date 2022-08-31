@@ -95,66 +95,6 @@
           </div>
         </div>
       </div>
-      <div v-if="feedback" class="flex items-center h-screen bg-gray-600 py-4">
-        <div class="w-full p-4">
-          <h2 class="text-center text-white font-bold text-2xl uppercase mb-10">
-            Fill out feedback form
-          </h2>
-          <div
-            class="bg-white shadow-xl p-10 rounded-lg shadow md:w-3/4 mx-auto lg:w-1/2"
-          >
-            <div class="mb-7">
-              <label for="email" class="block mb-2 font-bold text-gray-600"
-                >Rating</label
-              >
-              <div class="flex gap-2">
-                <input
-                  type="radio"
-                  value="1"
-                  v-model="feedbackForm.rating"
-                  class="focus:outline-none"
-                />
-                <label>1(Baik)</label>
-
-                <input
-                  type="radio"
-                  value="2"
-                  v-model="feedbackForm.rating"
-                  class="focus:outline-none"
-                />
-                <label>2(Sedang)</label>
-
-                <input
-                  type="radio"
-                  value="3"
-                  v-model="feedbackForm.rating"
-                  class="focus:outline-none"
-                />
-                <label>3(Buruk)</label>
-              </div>
-            </div>
-            <div class="mb-7">
-              <label for="message" class="block mb-2 font-bold text-gray-600"
-                >Message</label
-              >
-              <textarea
-                v-model="feedbackForm.message"
-                id="message"
-                name="message"
-                placeholder="Put in your feedback message."
-                class="border border-black shadow p-3 w-full rounded"
-              ></textarea>
-            </div>
-            <button
-              type="submit"
-              @click="addFeedbackData"
-              class="block w-full bg-black text-white font-bold p-3 rounded-lg"
-            >
-              Submit
-            </button>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 </template>
@@ -177,18 +117,12 @@ export default {
         picked: '',
         selectedPoint: 0,
       },
-      feedbackForm: {
-        email: '',
-        message: '',
-        rating: '',
-      },
       userData: {
         admin: 0,
         name: '',
         email: '',
         jumlahPoin: 0,
       },
-      feedback: false,
       paymentform: true,
       totalPoin: 0,
     };
@@ -245,31 +179,6 @@ export default {
         .then(() => {
           console.log('Document updated');
           alert('berhasil submit form');
-          this.feedback = true;
-          this.paymentform = false;
-        })
-        .catch((error) => {
-          console.error('Error adding document: ', error);
-        });
-    },
-    addFeedbackData() {
-      const dataTranksaksi = db
-        .collection('users')
-        .doc(firebase.auth().currentUser.uid);
-
-      dataTranksaksi
-        .update({
-          feedbackForm: firebase.firestore.FieldValue.arrayUnion({
-            email: firebase.auth().currentUser.email,
-            message: this.feedbackForm.message,
-            rating: this.feedbackForm.rating,
-          }),
-        })
-        .then(() => {
-          console.log('Document updated');
-          alert('terimakasih atas feedback anda');
-          this.feedback = false;
-          this.paymentform = true;
           this.$router.push({ name: 'home' });
         })
         .catch((error) => {

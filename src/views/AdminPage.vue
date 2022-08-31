@@ -87,81 +87,6 @@
         </div>
       </div>
     </section>
-    <section class="container mx-auto my-12 px-5">
-      <div class="p-6 flex justify-center">
-        <h3 class="text-3xl text-gray-700 font-bold -ml-3">
-          Form Feedback User
-        </h3>
-      </div>
-      <div class="p-5">
-        <div class="flex flex-col">
-          <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-              <div class="overflow-hidden">
-                <table class="min-w-full border text-center">
-                  <thead class="border-b">
-                    <tr>
-                      <th
-                        scope="col"
-                        class="text-sm font-medium bg-gray-800 text-white px-6 py-4 border-r"
-                      >
-                        #
-                      </th>
-                      <th
-                        scope="col"
-                        class="text-sm font-medium bg-gray-800 text-white px-6 py-4 border-r"
-                      >
-                        Email
-                      </th>
-                      <th
-                        scope="col"
-                        class="text-sm font-medium bg-gray-800 text-white px-6 py-4 border-r"
-                      >
-                        Message
-                      </th>
-                      <th
-                        scope="col"
-                        class="text-sm font-medium bg-gray-800 text-white px-6 py-4"
-                      >
-                        Rating
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr
-                      v-for="(item, index) in data.feedbackForm"
-                      :key="item.id"
-                      class="border-b"
-                    >
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r"
-                      >
-                        {{ index + 1 }}
-                      </td>
-                      <td
-                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r"
-                      >
-                        {{ item.email }}
-                      </td>
-                      <td
-                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r"
-                      >
-                        {{ item.message }}
-                      </td>
-                      <td
-                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r"
-                      >
-                        {{ item.rating }}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 </template>
 
@@ -180,15 +105,9 @@ export default {
           picked: '',
           selectedPoint: 0,
         },
-        feedbackForm: {
-          email: '',
-          message: '',
-          rating: '',
-        },
       },
       data: {
         historyForm: [],
-        feedbackForm: [],
       },
     };
   },
@@ -210,34 +129,6 @@ export default {
       .catch((error) => {
         console.log('Error getting documents: ', error);
       });
-    const queryFeedback = db
-      .collection('users')
-      .where('feedbackForm', '!=', null)
-      .get()
-      .then((queryFeedbackSnapshot) => {
-        queryFeedbackSnapshot.forEach((doc) => {
-          // doc.data() is never undefined for queryFeedback doc snapshots
-          const newData = doc.data();
-          this.userData.feedbackForm = newData.feedbackForm;
-          this.data.feedbackForm.push(...this.userData.feedbackForm);
-          console.log(this.data.feedbackForm);
-          // console.log(queryFeedback);
-          return queryFeedback;
-        });
-      })
-      .catch((error) => {
-        console.log('Error getting documents: ', error);
-      });
-    // const doesExist = (userData, value) => {
-    //   for (const key in userData) {
-    //     if (userData[key] === value) {
-    //       return true;
-    //     }
-    //   }
-    //   return false;
-    // };
-    // const exists = doesExist(userData, historyForm);
-    // return exists;
   },
   computed: {},
   methods: {},

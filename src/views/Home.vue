@@ -1,11 +1,11 @@
 <template>
   <!-- eslint-disable max-len -->
   <main>
-    <section class="container mx-auto my-6">
+    <section class="container mx-auto my-6 center">
       <Pengumuman />
     </section>
 
-    <section class="container mx-auto my-12 p-6">
+    <section class="container mx-auto my-12 p-6 center">
       <Dashboard v-if="userLoggedIn" />
     </section>
   </main>
